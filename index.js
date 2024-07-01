@@ -13,6 +13,7 @@ const { User } = require("./models/User");
 // //application/json 해석
 // app.use(bodyParser.json());
 
+//버전 업으로 express 에서 사용 가능.
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -40,9 +41,12 @@ app.post("/register", (req, res) => {
   //       success: true,
   //     });
   //   });
+  //
+
+  //버전 업그레이드로 인한 기존소스에서 수정
   user
     .save()
-    .then((userInfo) => res.status(200).json({ success: true }))    //status(200) 통신 성공 이라는 뜻...!
+    .then((userInfo) => res.status(200).json({ success: true })) //status(200) 통신 성공 이라는 뜻...!
     .catch((err) => res.json({ success: false, err }));
 });
 
