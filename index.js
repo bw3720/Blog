@@ -4,7 +4,10 @@ const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+
 const { User } = require("./models/User");
+
+const config = require("./config/key"); //key 현재 환경을 읽어와서 mongoDB 접속 주소 어떻게 줄지 정함
 
 //바디파서 : 클라이언트에서 오는 정보를 서버에서 분석해서 들여올수있게 하는것
 //application/x-www-form-urlencoded 해석
@@ -18,16 +21,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
-  .connect(
-    "mongodb+srv://pokbw3720:1a0cf36212@reactstudy.04taxau.mongodb.net/?retryWrites=true&w=majority&appName=reactStudy"
-  )
+  .connect(config.mongoURI)
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
 //
 
 app.get("/", (req, res) => {
-  res.send("Hello World! 안녕하세요");
+  res.send("Hello World! 안녕하세요. sssssssss");
 });
 
 app.post("/register", (req, res) => {
